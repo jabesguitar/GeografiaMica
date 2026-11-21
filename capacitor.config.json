@@ -1,0 +1,7 @@
+{
+  "appId": "br.com.quizgeografia.espacourbano",
+  "appName": "Quiz Geografia",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": { "androidScheme": "https" }
+}

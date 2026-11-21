@@ -1,0 +1,21 @@
+{
+  "name": "quiz-geografia-espaco-urbano",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quiz educativo offline de Geografia para o 6º ano — Espaço urbano",
+  "scripts": {
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "test": "node --test tests/*.test.js && node --check src/app.js"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/core": "^7.6.10"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10",
+    "vite": "^6.4.1",
+    "@capacitor/assets": "^3.0.5"
+  },
+  "type": "module"
+}
