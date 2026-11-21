@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -39,8 +38,28 @@ jobs:
       - name: Add Android platform
         run: npx cap add android
 
+      # Use the exact icon approved by the user, not the previous placeholder.
+      - name: Select approved native Android app icon
+        run: |
+          cp assets/icon-original.png assets/icon-only.png
+          cmp -s assets/icon-original.png assets/icon-only.png
+          echo "Approved icon SHA-256:"
+          sha256sum assets/icon-only.png
+
       - name: Generate native launcher and splash assets
         run: npx capacitor-assets generate --android
+
+      - name: Verify native Android launcher icons
+        run: |
+          test -s android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+          test -s android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+          test -s android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+          test -s android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+          test -s android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+          test -s android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
+          grep -q 'android:icon="@mipmap/ic_launcher"' android/app/src/main/AndroidManifest.xml
+          echo "Native Android launcher icon resources verified."
+          find android/app/src/main/res -path '*/mipmap-*/*ic_launcher*' -type f -print
 
       - name: Sync Android project
         run: npx cap sync android
